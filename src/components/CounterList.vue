@@ -1,3 +1,29 @@
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+import AppCounter from "@/components/AppCounter.vue";
+
+
+interface CounterConfig {
+  startValue: number
+  step: number
+}
+
+const counters: CounterConfig[] = [
+  { startValue: 0, step: 1 },
+  { startValue: 10, step: 2 },
+  { startValue: 5, step: 3 },
+]
+
+const values = ref<number[]>(counters.map(counter => counter.startValue))
+
+const updateCount = (index: number, value: number) => {
+  values.value[index] = value
+}
+
+const total = computed(() => {
+  return values.value.reduce((acc, val) => acc + val, 0)
+})
+</script>
 <template>
   <div class="container">
     <div class="counter-list">
@@ -14,33 +40,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import {computed, ref} from 'vue'
-import AppCounter from "@/components/AppCounter.vue";
-
-
-interface CounterConfig {
-  startValue: number
-  step: number
-}
-
-const counters: CounterConfig[] = [
-  {startValue: 0, step: 1},
-  {startValue: 10, step: 2},
-  {startValue: 5, step: 3},
-]
-
-const values = ref<number[]>(counters.map(c => c.startValue))
-
-const updateCount = (index: number, value: number) => {
-  values.value[index] = value
-}
-
-const total = computed(() => {
-  return values.value.reduce((acc, val) => acc + val, 0)
-})
-</script>
 
 <style lang="scss" scoped>
 .container{
