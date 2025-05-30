@@ -8,7 +8,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const emit = defineEmits<{
-  (e: 'update', value: number): void
+  (event: 'update', value: number): void
 }>()
 
 const count = ref(props.startValue)
@@ -21,8 +21,8 @@ const decrement = () => {
   count.value -= props.step
 }
 
-watch(count, (newVal) => {
-  emit('update', newVal)
+watch(count, (newValue) => {
+  emit('update', newValue)
 })
 </script>
 
